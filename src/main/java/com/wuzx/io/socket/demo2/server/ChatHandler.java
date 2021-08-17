@@ -32,12 +32,14 @@ public class ChatHandler implements Runnable{
 
             while (null != (msg = reader.readLine())) {
                 String fwdMsg = String.format("客户端[%s]-消息【%s】", client.getPort(), msg);
+                System.out.println(msg);
 
                 // 消息转发到群聊
                 chatServer.forwardMessage(client, fwdMsg);
 
                 // 检查用户是否退出
                 if (chatServer.readyExit(msg)) {
+                    chatServer.removeClient(client);
                     break;
                 }
             }

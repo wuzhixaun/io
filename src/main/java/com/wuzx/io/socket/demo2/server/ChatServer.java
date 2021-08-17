@@ -120,11 +120,10 @@ public class ChatServer {
                 // 创建chathandle线程
                 new Thread(new ChatHandler(this, client)).start();
             }
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            close();
         }
     }
 
