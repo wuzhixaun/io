@@ -1,4 +1,4 @@
-package com.wuzx.io.socket.demo2.server;
+package com.wuzx.io.bio.socket.demo2.server;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 服务器
@@ -20,8 +22,12 @@ public class ChatServer {
     private ServerSocket serverSocket;
     private Map<Integer, Writer> connectedClients;
 
+    private ExecutorService executorService;
+
 
     public ChatServer() {
+        executorService = Executors.newFixedThreadPool(10);
+
         connectedClients = new HashMap<>();
     }
 
@@ -118,7 +124,7 @@ public class ChatServer {
                 final Socket client = serverSocket.accept();
 
                 // 创建chathandle线程
-                new Thread(new ChatHandler(this, client)).start();
+                executorService.execute(new ChatHandler(this, client));
             }
         } catch (IOException e) {
             e.printStackTrace();

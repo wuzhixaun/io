@@ -1,10 +1,9 @@
-package com.wuzx.io.selector;
+package com.wuzx.io.bio.selector;
 
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 

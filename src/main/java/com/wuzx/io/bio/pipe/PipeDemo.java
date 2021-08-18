@@ -1,4 +1,4 @@
-package com.wuzx.io.pipe;
+package com.wuzx.io.bio.pipe;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

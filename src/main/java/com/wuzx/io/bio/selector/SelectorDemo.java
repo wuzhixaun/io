@@ -1,4 +1,4 @@
-package com.wuzx.io.selector;
+package com.wuzx.io.bio.selector;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.wuzx.io.buffers;
+package com.wuzx.io.bio.buffers;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.wuzx.io.channel;
+package com.wuzx.io.bio.channel;
 
 import org.junit.Test;
 

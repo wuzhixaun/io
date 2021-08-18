@@ -1,4 +1,4 @@
-package com.wuzx.io.filecopy;
+package com.wuzx.io.nio.filecopy;
 
 import java.io.File;
 

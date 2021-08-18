@@ -1,4 +1,4 @@
-package com.wuzx.io.socket.demo1;
+package com.wuzx.io.bio.socket.demo1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

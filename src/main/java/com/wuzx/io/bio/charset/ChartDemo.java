@@ -1,4 +1,4 @@
-package com.wuzx.io.charset;
+package com.wuzx.io.bio.charset;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
