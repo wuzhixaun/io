@@ -2,13 +2,9 @@ package com.wuzx.io.nio.filecopy;
 
 import org.junit.Test;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * @author wuzhixuan
@@ -109,10 +105,35 @@ public class FileCopyDemo {
     public void nioBufferCopy() {
 
         FileCopyRunner fileCopyRunner = (Source, target) -> {
+            FileChannel fin = null;
+            FileChannel fout = null;
 
+            try {
+                fin = new FileInputStream(Source).getChannel();
+                fout = new FileInputStream(target).getChannel();
+
+                final ByteBuffer byteBuffer = ByteBuffer.allocate(2048);
+
+                while (fin.read(byteBuffer) != -1) {
+                    byteBuffer.flip();
+
+                    while (byteBuffer.hasRemaining()) {
+                        fout.write(byteBuffer);
+                    }
+                    byteBuffer.clear();
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                close(fin);
+                close(fout);
+            }
         };
 
-        fileCopyRunner.copyFile(new File("E:\\Users\\admin\\Desktop\\1.jpg"), new File("E:\\Users\\admin\\Desktop\\4.jpg"));
+        fileCopyRunner.copyFile(new File("/Users/wuzhixuan/Java/IMG_1887.JPG"), new File("/Users/wuzhixuan/Java/1.JPG"));
     }
 
     /**
@@ -120,6 +141,25 @@ public class FileCopyDemo {
      */
     public void nioTransferCopy() {
 
+        FileCopyRunner fileCopyRunner =(Source, target) -> {
+
+            FileChannel fin = null;
+            FileChannel fout = null;
+
+            try {
+                fin = new FileInputStream(Source).getChannel();
+                fout = new FileInputStream(target).getChannel();
+
+                long transferSize = 0L;
+                while (transferSize != fin.size()) {
+                    transferSize += fin.transferTo(0, fin.size(), fout);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
     }
 
 }
