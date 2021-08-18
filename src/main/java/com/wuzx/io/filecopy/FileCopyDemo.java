@@ -2,6 +2,7 @@ package com.wuzx.io.filecopy;
 
 import org.junit.Test;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,26 +21,42 @@ public class FileCopyDemo {
 
 
     /**
+     * 关闭流资源
+     * @param closeable
+     */
+    public void close(Closeable closeable) {
+        try {
+            closeable.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
      * 一个字节一个字节拷贝
      */
     @Test
     public void noBufferFileCopy() {
 
         final FileCopyRunner fileCopyRunner = (Source, target) -> {
-
+            InputStream fin = null;
+            OutputStream fou = null;
             try {
                 // 创建输入流
-                InputStream fin = new FileInputStream(Source);
+                fin = new FileInputStream(Source);
 
                 // 创建输出流
-                OutputStream fou = new FileOutputStream(target);
+                fou = new FileOutputStream(target);
 
+                // 一次读取一个字节
                 int read;
                 while ((read = fin.read()) != -1) {
                     fou.write(read);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }finally {
+                close(fin);
+                close(fou);
             }
         };
 
@@ -55,13 +72,14 @@ public class FileCopyDemo {
     public void bufferFileCopy() {
 
         FileCopyRunner fileCopyRunner = (Source, target) -> {
-
+            InputStream fin = null;
+            OutputStream fou = null;
             try {
                 // 创建输入流
-                InputStream fin = new FileInputStream(Source);
+                fin = new FileInputStream(Source);
 
                 // 创建输出流
-                OutputStream fou = new FileOutputStream(target);
+                fou = new FileOutputStream(target);
 
                 byte[] bytes = new byte[2048];
 
@@ -73,10 +91,35 @@ public class FileCopyDemo {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }finally {
+                close(fin);
+                close(fou);
             }
 
         };
 
         fileCopyRunner.copyFile(new File("E:\\Users\\admin\\Desktop\\1.jpg"), new File("E:\\Users\\admin\\Desktop\\4.jpg"));
     }
+
+
+    /**
+     * niobuffer 拷贝
+     */
+    @Test
+    public void nioBufferCopy() {
+
+        FileCopyRunner fileCopyRunner = (Source, target) -> {
+
+        };
+
+        fileCopyRunner.copyFile(new File("E:\\Users\\admin\\Desktop\\1.jpg"), new File("E:\\Users\\admin\\Desktop\\4.jpg"));
+    }
+
+    /**
+     * nio transfer
+     */
+    public void nioTransferCopy() {
+
+    }
+
 }
