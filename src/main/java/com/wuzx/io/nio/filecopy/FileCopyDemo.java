@@ -158,6 +158,9 @@ public class FileCopyDemo {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                close(fin);
+                close(fout);
             }
         };
     }
