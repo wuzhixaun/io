@@ -1,4 +1,4 @@
-package com.wuzx.io.bio.socket.demo2.client;
+package com.wuzx.io.bio.chatroom.client;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

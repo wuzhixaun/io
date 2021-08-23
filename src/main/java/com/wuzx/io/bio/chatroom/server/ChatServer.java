@@ -1,4 +1,4 @@
-package com.wuzx.io.bio.socket.demo2.server;
+package com.wuzx.io.bio.chatroom.server;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
