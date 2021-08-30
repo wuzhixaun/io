@@ -103,8 +103,15 @@ public class ChatServer {
         }
     }
 
-    private class ClientHandler implements CompletionHandler<>{
+    private class ClientHandler implements CompletionHandler<Integer,Object>{
+        @Override
+        public void completed(Integer result, Object attachment) {
 
+        }
 
+        @Override
+        public void failed(Throwable exc, Object attachment) {
+
+        }
     }
 }
