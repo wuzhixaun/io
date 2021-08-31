@@ -1,8 +1,8 @@
 package com.wuzx.io.connector;
 
-import com.wuzx.io.webserver.ConnectorUtils;
-import com.wuzx.io.webserver.Request;
-import com.wuzx.io.webserver.Response;
+import com.wuzx.io.webserver.connector.ConnectorUtils;
+import com.wuzx.io.webserver.connector.Request;
+import com.wuzx.io.webserver.connector.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class ResponeTest {
 
         respone.sendStaticResoure();
 
-
+        System.out.println(out.toString());
         String res = readFiletoString(ConnectorUtils.WEB_ROOT + "/index.html");
         Assert.assertEquals(status_200 + res, out.toString());
     }

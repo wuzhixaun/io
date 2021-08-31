@@ -1,4 +1,4 @@
-package com.wuzx.io.webserver;
+package com.wuzx.io.webserver.connector;
 
 /**
  * http返回状态码

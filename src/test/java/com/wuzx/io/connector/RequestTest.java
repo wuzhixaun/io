@@ -1,6 +1,6 @@
 package com.wuzx.io.connector;
 
-import com.wuzx.io.webserver.Request;
+import com.wuzx.io.webserver.connector.Request;
 import org.junit.Assert;
 import org.junit.Test;
 
